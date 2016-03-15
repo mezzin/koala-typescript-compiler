@@ -4,11 +4,12 @@
 
 'use strict';
 
-var fs          = require('fs-extra'),
-    path        = require('path'),
-    util        = require('../util.js'),
-    FileManager = global.getFileManager(),
-    Compiler    = require(FileManager.appScriptsDir + '/Compiler.js');
+var FileManager = global.getFileManager(), 
+    util = require(FileManager.appScriptsDir+'/util.js'), 
+    path = require('path'), 
+    fs = require(FileManager.appRootDir+'/node_modules/fs-extra'), 
+    Compiler = require(FileManager.appScriptsDir + '/Compiler.js');
+
 
 /**
  * TypeScript Compiler
@@ -41,19 +42,9 @@ TypeScriptCompiler.prototype.compile = function (file, emitter) {
         argv = argv.concat(customOptions);
     }
 
-    argv.push('--compile');
-
     if (options.sourceMap) {
         argv.push('--sourcemap');
     }
-
-    //if (options.bare) {
-    //    argv.push('--bare');
-    //}
-    //
-    //if (options.literate) {
-    //    argv.push('--literate');
-    //}
     
     if (options.removeComments) {
         argv.push('--removeComments');
